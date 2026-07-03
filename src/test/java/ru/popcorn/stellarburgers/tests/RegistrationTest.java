@@ -1,5 +1,7 @@
 package ru.popcorn.stellarburgers.tests;
 
+import io.qameta.allure.Description;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.popcorn.stellarburgers.pages.LoginPage;
 import ru.popcorn.stellarburgers.pages.MainPage;
@@ -7,12 +9,11 @@ import ru.popcorn.stellarburgers.pages.RegistrationPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Тесты регистрации: успешная и с коротким паролем.
- */
 public class RegistrationTest extends BaseTest {
 
     @Test
+    @DisplayName("Успешная регистрация нового пользователя")
+    @Description("Проверяет, что новый пользователь может зарегистрироваться и после логина попасть на главную страницу")
     public void successfulRegistration() {
         MainPage mainPage = new MainPage(driver).open();
         LoginPage loginPage = mainPage.clickLoginButtonMain().waitForPageToLoad();
@@ -33,11 +34,15 @@ public class RegistrationTest extends BaseTest {
                 .fillCredentials(email, password)
                 .submitLoginExpectingMainPage();
 
-        assertTrue(resultPage.isMainRootVisible(),
-                "После успешной регистрации и последующего логина пользователь должен попасть на главную страницу");
+        assertTrue(
+                resultPage.isMainRootVisible(),
+                "После успешной регистрации и последующего логина пользователь должен попасть на главную страницу"
+        );
     }
 
     @Test
+    @DisplayName("Ошибка при регистрации с коротким паролем")
+    @Description("Проверяет, что при вводе пароля короче 6 символов отображается сообщение об ошибке")
     public void registrationWithShortPasswordShowsError() {
         MainPage mainPage = new MainPage(driver).open();
         LoginPage loginPage = mainPage.clickLoginButtonMain().waitForPageToLoad();
@@ -50,7 +55,9 @@ public class RegistrationTest extends BaseTest {
                 .fillForm("Test User", "shortpass@mail.ru", "123")
                 .submitRegistrationExpectingLogin();
 
-        assertTrue(registrationPage.isPasswordErrorVisible(),
-                "При регистрации с коротким паролем должно отображаться сообщение об ошибке");
+        assertTrue(
+                registrationPage.isPasswordErrorVisible(),
+                "При регистрации с коротким паролем должно отображаться сообщение об ошибке"
+        );
     }
 }

@@ -1,16 +1,12 @@
 package ru.popcorn.stellarburgers.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-/**
- * Страница конструктора бургеров.
- * Позволяет переключаться между вкладками «Булки», «Соусы», «Начинки»
- * и проверять видимость соответствующих секций.
- */
 public class ConstructorPage extends BasePage {
 
     @FindBy(xpath = "//span[normalize-space()='Булки']/parent::div")
@@ -35,24 +31,28 @@ public class ConstructorPage extends BasePage {
         super(driver);
     }
 
+    @Step("Кликнуть на вкладку «Булки»")
     public ConstructorPage clickBunsTab() {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(bunsTab));
         scrollAndJsClick(element);
         return this;
     }
 
+    @Step("Кликнуть на вкладку «Соусы»")
     public ConstructorPage clickSaucesTab() {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(saucesTab));
         scrollAndJsClick(element);
         return this;
     }
 
+    @Step("Кликнуть на вкладку «Начинки»")
     public ConstructorPage clickFillingsTab() {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(fillingsTab));
         scrollAndJsClick(element);
         return this;
     }
 
+    @Step("Проверить видимость секции «Булки»")
     public boolean isBunsSectionVisible() {
         try {
             return wait.until(ExpectedConditions.visibilityOf(bunsSectionHeader)).isDisplayed();
@@ -61,6 +61,7 @@ public class ConstructorPage extends BasePage {
         }
     }
 
+    @Step("Проверить видимость секции «Соусы»")
     public boolean isSaucesSectionVisible() {
         try {
             return wait.until(ExpectedConditions.visibilityOf(saucesSectionHeader)).isDisplayed();
@@ -69,6 +70,7 @@ public class ConstructorPage extends BasePage {
         }
     }
 
+    @Step("Проверить видимость секции «Начинки»")
     public boolean isFillingsSectionVisible() {
         try {
             return wait.until(ExpectedConditions.visibilityOf(fillingsSectionHeader)).isDisplayed();

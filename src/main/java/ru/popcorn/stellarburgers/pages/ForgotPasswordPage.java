@@ -1,13 +1,11 @@
 package ru.popcorn.stellarburgers.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-/**
- * Страница восстановления пароля.
- */
 public class ForgotPasswordPage extends BasePage {
 
     @FindBy(xpath = "//input[@type='email']")
@@ -23,11 +21,13 @@ public class ForgotPasswordPage extends BasePage {
         super(driver);
     }
 
+    @Step("Ожидать загрузки страницы восстановления пароля")
     public ForgotPasswordPage waitForPageToLoad() {
         wait.until(ExpectedConditions.visibilityOf(restoreButton));
         return this;
     }
 
+    @Step("Ввести email «{email}» для восстановления пароля")
     public ForgotPasswordPage fillEmail(String email) {
         wait.until(ExpectedConditions.visibilityOf(emailInput));
         emailInput.clear();
@@ -35,6 +35,7 @@ public class ForgotPasswordPage extends BasePage {
         return this;
     }
 
+    @Step("Перейти на страницу логина со страницы восстановления пароля")
     public LoginPage goToLoginPage() {
         wait.until(ExpectedConditions.elementToBeClickable(loginLink)).click();
         return new LoginPage(driver);
