@@ -12,11 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest extends BaseTest {
 
-    private final String validEmail =
-            System.getProperty("testUserEmail", "lapz@mail.ru");
-    private final String validPassword =
-            System.getProperty("testUserPassword", "111111");
-
     @Test
     @DisplayName("Вход через кнопку «Войти в аккаунт» на главной странице")
     @Description("Проверяет, что пользователь может войти через кнопку «Войти в аккаунт» на главной странице")
@@ -24,7 +19,7 @@ public class LoginTest extends BaseTest {
         MainPage mainPage = new MainPage(driver).open();
         LoginPage loginPage = mainPage.clickLoginButtonMain().waitForPageToLoad();
         MainPage resultPage = loginPage
-                .fillCredentials(validEmail, validPassword)
+                .fillCredentials(userEmail, userPassword)
                 .submitLoginExpectingMainPage();
         assertTrue(
                 resultPage.isMainRootVisible(),
@@ -39,7 +34,7 @@ public class LoginTest extends BaseTest {
         MainPage mainPage = new MainPage(driver).open();
         LoginPage loginPage = mainPage.clickPersonalAccountButton().waitForPageToLoad();
         MainPage resultPage = loginPage
-                .fillCredentials(validEmail, validPassword)
+                .fillCredentials(userEmail, userPassword)
                 .submitLoginExpectingMainPage();
         assertTrue(
                 resultPage.isMainRootVisible(),
@@ -60,7 +55,7 @@ public class LoginTest extends BaseTest {
                 .goToLoginPage()
                 .waitForPageToLoad();
         MainPage resultPage = backToLogin
-                .fillCredentials(validEmail, validPassword)
+                .fillCredentials(userEmail, userPassword)
                 .submitLoginExpectingMainPage();
         assertTrue(
                 resultPage.isMainRootVisible(),
@@ -81,7 +76,7 @@ public class LoginTest extends BaseTest {
                 .goToLoginPage()
                 .waitForPageToLoad();
         MainPage resultPage = backToLogin
-                .fillCredentials(validEmail, validPassword)
+                .fillCredentials(userEmail, userPassword)
                 .submitLoginExpectingMainPage();
         assertTrue(
                 resultPage.isMainRootVisible(),
